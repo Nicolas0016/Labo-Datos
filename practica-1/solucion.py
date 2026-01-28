@@ -30,13 +30,13 @@ def especies(lista_arboles):
     
 
 def contar_ejemplares(lista_arboles):
-    res = {}
+    res = []
     for arbol in lista_arboles['nombre_com']:
-        if arbol in res.keys():
+        if arbol in res:
             res[arbol] +=1
         else:
             res[arbol] = 1
-    return pd.Series(data=res)
+    return res
 
 def obtener_alturas(lista_arboles:pd.DataFrame, especie):
     return list(lista_arboles[lista_arboles['nombre_com'] == especie]['altura_tot'])
@@ -49,21 +49,24 @@ def calcular_promedio_y_maximo(lista_de_alturas):
     maximo = max(lista_de_alturas)
     return round(promedio,2), maximo
 
+def obtener_inclinaciones(lista_arboles, ejemplares):
+    inclinaciones_registradas = []
+    for inclinacion in lista_arboles[lista_arboles['nombre_com']==ejemplares]['inclinacio']:
+        inclinaciones_registradas.append(inclinacion)
+    return inclinaciones_registradas
 
-"""
-parques = ['GENERAL PAZ', 'LOS ANDES', 'CENTENARIO']
-resultados = {}
 
-for parque in parques:
-    arboles = leer_parque('arbolado-en-espacios-verdes.csv', parque)
-    alturas = obtener_alturas(arboles, 'Jacarandá')
-    prom, maxi = calcular_promedio_y_maximo(alturas)
-    resultados[parque] = {'max': maxi, 'prom': prom}
-
-"""
+def especimen_mas_inclinado(lista_arboles):
+    registro_de_especies = []
+    especies_registradas = especies(lista_arboles)
+    
+    for especie in especies_registradas:
+        maximo_registro = max(obtener_inclinaciones(lista_arboles, especie))
+        registro_de_especies.append((especie,maximo_registro))
+    return max(registro_de_especies, key=lambda x:x[1])
 
 parque = leer_parque('arbolado-en-espacios-verdes.csv', 'GENERAL PAZ')
-ejemplares = contar_ejemplares(parque)
+ejemplares = especimen_mas_inclinado(parque)
 
 
 
