@@ -65,8 +65,19 @@ def especimen_mas_inclinado(lista_arboles):
         registro_de_especies.append((especie,maximo_registro))
     return max(registro_de_especies, key=lambda x:x[1])
 
+
+def especie_promedio_mas_inclinada(lista_arboles):
+    registro_de_especies = []
+    especies_registradas = especies(lista_arboles)
+    
+    for especie in especies_registradas:
+        maximo_registro = sum(obtener_inclinaciones(lista_arboles, especie)) / len(obtener_inclinaciones(lista_arboles, especie))
+        registro_de_especies.append((especie,maximo_registro))
+        
+    return max(registro_de_especies, key=lambda x:x[1])
+
 parque = leer_parque('arbolado-en-espacios-verdes.csv', 'GENERAL PAZ')
-ejemplares = especimen_mas_inclinado(parque)
+ejemplares = especie_promedio_mas_inclinada(parque)
 
 
 
