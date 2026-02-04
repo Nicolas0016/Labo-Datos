@@ -264,6 +264,7 @@ consultaSQL = """
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
+dataframeResultado
 
 #%% # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -282,26 +283,33 @@ dataframeResultado = dd.sql(consultaSQL).df()
 #=============================================================================
 # Ejercicio 02.1.- Devolver los números de vuelo que tienen reservas generadas (utilizar intersección)
 consultaSQL = """
-
+                SELECT Numero FROM vuelo
+                INTERSECT
+                SElECT NroVuelo FROM reserva
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
-
+dataframeResultado
 #%%-----------
 # Ejercicio 02.2.- Devolver los números de vuelo que aún no tienen reservas
 consultaSQL = """
-
+                SELECT Numero FROM vuelo
+                EXCEPT
+                SELECT NroVuelo FROM reserva
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
-
+dataframeResultado
 #%%-----------
 # Ejercicio 02.3.- Retornar los códigos de aeropuerto de los que parten o arriban los vuelos
 consultaSQL = """
-
+                SELECT Origen FROM vuelo
+                UNION
+                SELECT Destino FROM vuelo
               """
               
 dataframeResultado = dd.sql(consultaSQL).df()
+dataframeResultado
 
 
 
