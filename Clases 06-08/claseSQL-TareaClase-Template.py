@@ -203,6 +203,7 @@ consultaSQL = """
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
+dataframeResultado
 
 
 #%% # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -221,35 +222,45 @@ dataframeResultado = dd.sql(consultaSQL).df()
 # a1.- Listar a los alumnos que cursan BDs o TLENG
 
 consultaSQL = """
-
+                SELECT * FROM alumnosBD 
+                UNION 
+                SELECT * FROM alumnosTLeng
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
-
+dataframeResultado
 
 #%% -----------
 # a2.- Listar a los alumnos que cursan BDs o TLENG (usando UNION ALL)
 
 consultaSQL = """
-
+                SELECT * FROM alumnosBD 
+                UNION ALL
+                SELECT * FROM alumnosTLeng
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
+dataframeResultado
+
 
 #%% -----------
 # b.- Listar a los alumnos que cursan simultáneamente BDs y TLENG
 
 consultaSQL = """
-
+                SELECT * FROM alumnosBD 
+                INTERSECT 
+                SELECT * FROM alumnosTLeng
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
-
+dataframeResultado
 #%% -----------
 # c.- Listar a los alumnos que cursan BDs y no cursan TLENG 
 
 consultaSQL = """
-
+                SELECT * FROM alumnosBD 
+                EXCEPT 
+                SELECT * FROM alumnosTLeng
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
