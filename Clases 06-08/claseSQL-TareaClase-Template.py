@@ -147,10 +147,12 @@ dataframeResultado
 #=============================================================================
 # Ejercicio 01.1.- Retornar Codigo y Nombre de los aeropuertos de Londres
 consultaSQL = """
-
+                SELECT Codigo, Nombre From aeropuerto
+                WHERE Ciudad = 'Londres'
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
+dataframeResultado
 
 #%% -----------
 # Ejercicio 01.2.- ¿Qué retorna 
@@ -158,30 +160,45 @@ dataframeResultado = dd.sql(consultaSQL).df()
 #                       FROM aeropuerto 
 #                       WHERE Codigo='ORY' OR Codigo='CDG'; ?
 consultaSQL = """
-
+                SELECT DISTINCT Ciudad AS City 
+                FROM aeropuerto 
+                WHERE Codigo='ORY' OR Codigo='CDG'; 
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
+dataframeResultado
 
 #%% -----------
 # Ejercicio 01.3.- Obtener los números de vuelo que van desde CDG hacia LHR
 consultaSQL = """
-
+                SELECT DISTINCT Numero
+                FROM vuelo 
+                WHERE Origen='CDG' AND Destino='LHR'; 
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
+dataframeResultado
 
 #%% -----------
 # Ejercicio 01.4.- Obtener los números de vuelo que van desde CDG hacia LHR o viceversa
 consultaSQL = """
-
+                SELECT DISTINCT Numero
+                FROM vuelo 
+                WHERE 
+                (Origen='CDG' AND Destino='LHR')
+                OR
+                (Origen='LHR'AND Destino='CDG' ); 
               """
 
 dataframeResultado = dd.sql(consultaSQL).df()
+dataframeResultado
 
 #%% -----------
 # Ejercicio 01.5.- Devolver las fechas de reservas cuyos precios son mayores a $200
 consultaSQL = """
+                SELECT Fecha
+                FROM reserva
+                WHERE Precio > 200
 
               """
 
