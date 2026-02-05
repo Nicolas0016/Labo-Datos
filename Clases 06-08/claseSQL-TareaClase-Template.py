@@ -852,12 +852,11 @@ notaParcial01 = dd.query('''
 notaParcial01
 notaParcial02 = dd.query('''
     SELECT DISTINCT 
-    
-    notaParcial01.nombre,
-    notaParcial01.sexo,
-    notaParcial01.edad,
-    notaParcial01.NotaParcial01, 
-    examen.nota as NotaParcial02
+        notaParcial01.nombre,
+        notaParcial01.sexo,
+        notaParcial01.edad,
+        notaParcial01.NotaParcial01, 
+        examen.nota as NotaParcial02
     FROM notaParcial01
     LEFT OUTER JOIN examen
     ON examen.nombre = notaParcial01.nombre AND examen.instancia = 'Parcial-02'
@@ -866,12 +865,12 @@ notaParcial02
 
 notaRecuperatorio01 = dd.query('''
     SELECT DISTINCT 
-    notaParcial02.nombre,
-    notaParcial02.sexo,
-    notaParcial02.edad,
-    notaParcial02.NotaParcial01, 
-    notaParcial02.NotaParcial02,
-    examen.nota as notaRecuperatorio01
+        notaParcial02.nombre,
+        notaParcial02.sexo,
+        notaParcial02.edad,
+        notaParcial02.NotaParcial01, 
+        notaParcial02.NotaParcial02,
+        examen.nota as notaRecuperatorio01
     FROM notaParcial02
     LEFT OUTER JOIN examen
     ON examen.nombre = notaParcial02.nombre AND examen.instancia = 'Recuperatorio-01'
@@ -883,9 +882,9 @@ notaRecuperatorio02 = dd.query('''
         notaRecuperatorio01.sexo,
         notaRecuperatorio01.edad,
         notaRecuperatorio01.NotaParcial01, 
-    notaRecuperatorio01.NotaParcial02,
-    notaRecuperatorio01.NotaRecuperatorio01,
-    examen.nota as notaRecuperatorio02
+        notaRecuperatorio01.NotaParcial02,
+        notaRecuperatorio01.NotaRecuperatorio01,
+        examen.nota as notaRecuperatorio02
     FROM notaRecuperatorio01
     LEFT OUTER JOIN examen
     ON examen.nombre = notaRecuperatorio01.nombre AND examen.instancia = 'Recuperatorio-02'
